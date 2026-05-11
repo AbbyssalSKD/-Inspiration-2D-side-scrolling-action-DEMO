@@ -14,7 +14,7 @@ enum FACING {
 
 var gravity := ProjectSettings.get("physics/2d/default_gravity") as float 
 var run_speed : float = 200.0
-var jump_velocity : float = -300.0
+var jump_velocity : float = -400.0
 
 var action_state : STATE = STATE.floor
 var facing_state : FACING = FACING.R
