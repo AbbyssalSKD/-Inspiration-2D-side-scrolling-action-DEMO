@@ -278,3 +278,6 @@ shape = SubResource("RectangleShape2D_hjaqi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1763010771]
 libraries/ = SubResource("AnimationLibrary_g2vtq")
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=813554912]
+wait_time = 0.1
