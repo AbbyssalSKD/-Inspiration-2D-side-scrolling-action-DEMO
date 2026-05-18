@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://oc20v1jktqav"]
 
-[ext_resource type="Script" uid="uid://bmwp6fhqyiimj" path="res://scene/player.gd" id="1_hjaqi"]
+[ext_resource type="Script" uid="uid://nlmlo2dhgow3" path="res://script/Player_restructed.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://xpu21x0ssi64" path="res://Asset/oak_woods_v1.0/character/char_blue.png" id="1_xo3ru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaqi"]
@@ -280,4 +280,5 @@ shape = SubResource("RectangleShape2D_hjaqi")
 libraries/ = SubResource("AnimationLibrary_g2vtq")
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=813554912]
-wait_time = 0.1
+wait_time = 0.2
+one_shot = true
