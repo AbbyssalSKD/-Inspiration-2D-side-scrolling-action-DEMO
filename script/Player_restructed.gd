@@ -58,7 +58,7 @@ func tick_physics(s: STATE, delta: float) -> void:
 		STATE.fall:
 			move(delta)
 
-			if Input.is_action_just_pressed("jump") and has_jumped and can_double_jump:
+			if Input.is_action_just_pressed("jump") and can_double_jump:
 				can_double_jump = false
 				do_double_jump()
 			elif Input.is_action_just_pressed("jump") and not has_jumped and coyote_timer.time_left > 0:
@@ -78,7 +78,13 @@ func tick_physics(s: STATE, delta: float) -> void:
 			velocity.y = min(velocity.y, 100)
 			graphic.scale.x = get_wall_normal().x
 			
-	print(velocity.y,  " ", state)
+			if Input.is_action_just_pressed("jump") and not has_jumped and is_on_wall():
+				hold_jump = true
+				can_double_jump = true
+				has_jumped = true
+				do_wall_jump()	
+			
+	print(velocity.x)
 	
 
 
@@ -129,6 +135,13 @@ func do_jump() -> void:
 	animation_player.play("jump_up")
 	velocity.y = jump_velocity
 	coyote_timer.stop()
+	
+	
+func do_wall_jump() -> void:
+	animation_player.play("jump_up")
+	velocity.y = jump_velocity
+	velocity.x = 320 * get_wall_normal().x
+	coyote_timer.stop()
 
 
 func can_1st_jump() -> bool:
@@ -156,6 +169,8 @@ func state_control(s: STATE) -> STATE:
 				return STATE.floor
 			
 			if is_on_wall():
+				has_jumped = false
+				can_double_jump = false
 				return STATE.wall_slide
 				
 		STATE.wall_slide:
@@ -163,7 +178,12 @@ func state_control(s: STATE) -> STATE:
 				has_jumped = false
 				can_double_jump = false
 				return STATE.floor
-			
+				
+			if not is_on_wall():
+				return STATE.fall
+				
+			if velocity.y < 0:
+				return STATE.jump
 	return s
 			
 
